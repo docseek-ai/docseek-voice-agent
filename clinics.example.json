@@ -1,0 +1,104 @@
+{
+  "sterling-family-medicine": {
+    "name": "Sterling Family Medicine",
+    "address": "123 Main St, Springfield, IL 62701",
+    "phone": "+1-217-555-0100",
+    "timezone": "America/Chicago",
+    "email": "info@sterlingfamilymedicine.com",
+    "website": "www.sterlingfamilymedicine.com",
+    "tagline": "Compassionate primary care for your whole family",
+    "accepts_insurance": [
+      "Aetna",
+      "Blue Cross Blue Shield",
+      "Cigna",
+      "Medicare",
+      "Medicaid"
+    ],
+    "office_hours": {
+      "monday": "8:00 AM - 5:00 PM",
+      "tuesday": "8:00 AM - 5:00 PM",
+      "wednesday": "8:00 AM - 12:00 PM",
+      "thursday": "8:00 AM - 5:00 PM",
+      "friday": "8:00 AM - 5:00 PM",
+      "saturday": "9:00 AM - 12:00 PM",
+      "sunday": "CLOSED"
+    },
+    "doctors": [
+      {
+        "id": "dr-sarah-johnson",
+        "name": "Dr. Sarah Johnson",
+        "title": "MD",
+        "speciality": "Internal Medicine",
+        "bio": "Dr. Johnson is a board-certified internist with 15+ years of experience in primary care and chronic disease management.",
+        "email": "sjohnson@sterlingfamilymedicine.com",
+        "phone": "555-0101",
+        "default_appointment_duration": 30,
+        "availability_buffer": 15,
+        "accepts_new_patients": true
+      },
+      {
+        "id": "dr-michael-chen",
+        "name": "Dr. Michael Chen",
+        "title": "MD",
+        "speciality": "Cardiology",
+        "bio": "Dr. Chen specializes in preventive cardiology and is an expert in managing hypertension and heart disease.",
+        "email": "mchen@sterlingfamilymedicine.com",
+        "phone": "555-0102",
+        "default_appointment_duration": 45,
+        "availability_buffer": 20,
+        "accepts_new_patients": false
+      },
+      {
+        "id": "np-emily-rodriguez",
+        "name": "Nurse Practitioner Emily Rodriguez",
+        "title": "NP-C",
+        "speciality": "Family Medicine",
+        "bio": "NP Rodriguez provides comprehensive family medicine care including preventive health, minor acute illness, and chronic disease management.",
+        "email": "erodriguez@sterlingfamilymedicine.com",
+        "phone": "555-0103",
+        "default_appointment_duration": 30,
+        "availability_buffer": 15,
+        "accepts_new_patients": true
+      }
+    ]
+  },
+  "example-cardiology-clinic": {
+    "name": "Advanced Cardiac Care",
+    "address": "456 Heart St, Chicago, IL 60601",
+    "phone": "+1-312-555-0200",
+    "timezone": "America/Chicago",
+    "email": "appointments@advancedcardiac.com",
+    "website": "www.advancedcardiac.com",
+    "tagline": "Expert cardiac care you can trust",
+    "accepts_insurance": [
+      "Aetna",
+      "Blue Cross Blue Shield",
+      "Cigna",
+      "United Healthcare",
+      "Medicare"
+    ],
+    "office_hours": {
+      "monday": "8:00 AM - 5:00 PM",
+      "tuesday": "8:00 AM - 5:00 PM",
+      "wednesday": "8:00 AM - 5:00 PM",
+      "thursday": "8:00 AM - 5:00 PM",
+      "friday": "8:00 AM - 5:00 PM",
+      "saturday": "CLOSED",
+      "sunday": "CLOSED"
+    },
+    "doctors": [
+      {
+        "id": "dr-john-smith",
+        "name": "Dr. John Smith",
+        "title": "MD, FACC",
+        "speciality": "Cardiology",
+        "bio": "Dr. Smith is a board-certified cardiologist with expertise in interventional cardiology and heart failure management.",
+        "email": "jsmith@advancedcardiac.com",
+        "phone": "312-555-0201",
+        "default_appointment_duration": 60,
+        "availability_buffer": 20,
+        "accepts_new_patients": true
+      }
+    ]
+  }
+}

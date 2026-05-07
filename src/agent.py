@@ -32,6 +32,7 @@ from livekit import api
 # Import medical-specific logic
 from docseek_voice_agent.config import settings
 from docseek_voice_agent.clinic_logic import MedicalAgentPrompt, AppointmentHandler
+from docseek_voice_agent.clinic_config import get_clinic_profile
 
 # Configure logging
 logging.basicConfig(
@@ -88,6 +89,27 @@ async def entrypoint(ctx: AgentContext):
     # Initialize medical agent
     medical_agent = MedicalFrontDeskAgent(ctx)
 
+    # Load clinic profile if configured
+    clinic_name = settings.clinic_name
+    doctor_name = None
+
+    if settings.clinic_id:
+        clinic_profile = get_clinic_profile(settings.clinic_id)
+        if clinic_profile:
+            clinic_name = clinic_profile.name
+            logger.info(f"Loaded clinic profile: {clinic_profile.name}")
+
+            # If doctor_id specified, use that doctor's profile
+            if settings.doctor_id:
+                doctor = clinic_profile.get_doctor_by_id(settings.doctor_id)
+                if doctor:
+                    doctor_name = doctor.name
+                    logger.info(f"Agent focused on doctor: {doctor_name}")
+                else:
+                    logger.warning(f"Doctor ID not found in clinic: {settings.doctor_id}")
+        else:
+            logger.warning(f"Clinic profile not found: {settings.clinic_id}")
+
     # Get speech and LLM configurations from settings
     stt_model = settings.stt_provider
     llm_model = settings.llm_model
@@ -96,11 +118,18 @@ async def entrypoint(ctx: AgentContext):
     logger.info(f"Using STT: {stt_model}, LLM: {llm_model}, TTS: {tts_voice}")
 
     # Create the voice pipeline with medical context
+    system_prompt = MedicalAgentPrompt.system_prompt(clinic_name, doctor_name)
+
+    # Add doctor info if focused on a specific doctor
+    if doctor_name:
+        doctor_info = MedicalAgentPrompt.doctor_info_prompt(doctor_name)
+        system_prompt += f"\n\n{doctor_info}"
+
     initial_ctx = ChatContext(
         messages=[
             ChatMessage(
                 role="system",
-                content=MedicalAgentPrompt.system_prompt(settings.clinic_name),
+                content=system_prompt,
             ),
         ]
     )

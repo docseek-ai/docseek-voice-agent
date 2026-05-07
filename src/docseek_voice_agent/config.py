@@ -37,22 +37,24 @@ class Settings(BaseSettings):
     agent_name: str = Field(default="docseek-front-desk")
     log_level: str = Field(default="info")
 
-    # Clinic/Medical Practice Settings
+    # Clinic Profile Configuration (RECOMMENDED)
+    # Set CLINIC_ID to load all clinic settings (name, phone, address, doctors, hours)
+    clinic_id: Optional[str] = Field(default=None)
+
+    # Fallback: Manual Clinic Settings (used if CLINIC_ID not set)
     clinic_name: str = Field(default="DocSeek Medical")
     clinic_timezone: str = Field(default="America/Chicago")
     clinic_phone: str = Field(default="+1-555-0123")
     clinic_address: str = Field(default="")
 
+    # Doctor-Specific Configuration (optional)
+    # If set, agent focuses on this doctor's schedule
+    doctor_id: Optional[str] = Field(default=None)
+
     # Agent Behavior
     enable_appointment_booking: bool = Field(default=True)
     enable_patient_intake: bool = Field(default=True)
     max_conversation_duration: int = Field(default=600)  # seconds
-
-    # Doctor-Specific Configuration (optional)
-    # Set to focus agent on a specific doctor's schedule
-    doctor_name: Optional[str] = Field(default=None)
-    doctor_speciality: Optional[str] = Field(default=None)
-    doctor_bio: Optional[str] = Field(default=None)
 
     class Config:
         env_file = ".env.local"
