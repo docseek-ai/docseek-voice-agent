@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "docseek-appointments": {
+      "command": "python",
+      "args": [
+        "-m",
+        "docseek_voice_agent.mcp_server"
+      ],
+      "env": {
+        "DATABASE_URL": "sqlite:///./docseek_voice.db",
+        "LOG_LEVEL": "info"
+      }
+    }
+  }
+}
