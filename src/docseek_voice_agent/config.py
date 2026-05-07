@@ -48,6 +48,12 @@ class Settings(BaseSettings):
     enable_patient_intake: bool = Field(default=True)
     max_conversation_duration: int = Field(default=600)  # seconds
 
+    # Doctor-Specific Configuration (optional)
+    # Set to focus agent on a specific doctor's schedule
+    doctor_name: Optional[str] = Field(default=None)
+    doctor_speciality: Optional[str] = Field(default=None)
+    doctor_bio: Optional[str] = Field(default=None)
+
     class Config:
         env_file = ".env.local"
         env_file_encoding = "utf-8"

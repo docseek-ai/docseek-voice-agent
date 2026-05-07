@@ -1,0 +1,56 @@
+{
+  "dr-sarah-johnson": {
+    "name": "Dr. Sarah Johnson",
+    "title": "MD",
+    "speciality": "Internal Medicine",
+    "bio": "Dr. Johnson is a board-certified internist with 15+ years of experience in primary care and chronic disease management.",
+    "email": "sjohnson@docseek.com",
+    "phone": "555-0101",
+    "office_hours": {
+      "monday": "8:00 AM - 5:00 PM",
+      "tuesday": "8:00 AM - 5:00 PM",
+      "wednesday": "8:00 AM - 12:00 PM",
+      "thursday": "8:00 AM - 5:00 PM",
+      "friday": "8:00 AM - 5:00 PM"
+    },
+    "default_appointment_duration": 30,
+    "availability_buffer": 15,
+    "accepts_new_patients": true
+  },
+  "dr-michael-chen": {
+    "name": "Dr. Michael Chen",
+    "title": "MD",
+    "speciality": "Cardiology",
+    "bio": "Dr. Chen specializes in preventive cardiology and is an expert in managing hypertension and heart disease.",
+    "email": "mchen@docseek.com",
+    "phone": "555-0102",
+    "office_hours": {
+      "monday": "9:00 AM - 5:00 PM",
+      "tuesday": "9:00 AM - 5:00 PM",
+      "wednesday": "CLOSED",
+      "thursday": "9:00 AM - 5:00 PM",
+      "friday": "9:00 AM - 2:00 PM"
+    },
+    "default_appointment_duration": 45,
+    "availability_buffer": 20,
+    "accepts_new_patients": false
+  },
+  "np-emily-rodriguez": {
+    "name": "Nurse Practitioner Emily Rodriguez",
+    "title": "NP-C",
+    "speciality": "Family Medicine",
+    "bio": "NP Rodriguez provides comprehensive family medicine care including preventive health, minor acute illness, and chronic disease management.",
+    "email": "erodriguez@docseek.com",
+    "phone": "555-0103",
+    "office_hours": {
+      "monday": "8:00 AM - 6:00 PM",
+      "tuesday": "8:00 AM - 6:00 PM",
+      "wednesday": "8:00 AM - 6:00 PM",
+      "thursday": "8:00 AM - 6:00 PM",
+      "friday": "8:00 AM - 4:00 PM"
+    },
+    "default_appointment_duration": 30,
+    "availability_buffer": 15,
+    "accepts_new_patients": true
+  }
+}

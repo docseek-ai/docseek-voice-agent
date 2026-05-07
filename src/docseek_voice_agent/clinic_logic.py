@@ -2,9 +2,12 @@
 
 import logging
 from datetime import datetime, timedelta
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 from dataclasses import dataclass
 import json
+
+from docseek_voice_agent.config import settings
+from docseek_voice_agent.doctor_config import get_doctor_profile, list_doctors
 
 logger = logging.getLogger(__name__)
 
@@ -34,8 +37,81 @@ class MedicalAgentPrompt:
     """System prompts and conversation templates for medical agent."""
 
     @staticmethod
-    def system_prompt(clinic_name: str) -> str:
-        """Generate the system prompt for the medical voice agent."""
+    def system_prompt(clinic_name: str, doctor_name: Optional[str] = None) -> str:
+        """Generate the system prompt for the medical voice agent.
+
+        Args:
+            clinic_name: Name of the clinic
+            doctor_name: Optional specific doctor name to focus on
+
+        Returns:
+            System prompt for the agent
+        """
+        base_prompt = f"""You are a professional, empathetic medical front desk receptionist for {clinic_name}."""
+
+        if doctor_name:
+            base_prompt += f"\n\nYou primarily schedule appointments for {doctor_name}. When patients ask about appointments, \
+prioritize {doctor_name}'s availability. If they request a different provider, help them accordingly, but {doctor_name} is your primary focus."
+
+        base_prompt += """
+
+Your responsibilities:
+1. Greet patients warmly and professionally
+2. Help schedule appointments with available providers
+3. Collect necessary patient information (name, phone, reason for visit)
+4. Answer basic questions about office hours and services
+5. Handle appointment cancellations and rescheduling requests
+6. Provide directions and parking information if needed
+7. Confirm patient insurance information when relevant
+
+Guidelines:
+- Always be warm, empathetic, and professional
+- Speak clearly and at a moderate pace
+- Ask one question at a time
+- Confirm all important details (name, date, time, phone number)
+- If you need to put someone on hold, offer a callback instead
+- For medical emergencies, recommend calling 911 immediately
+- Never provide medical advice - suggest speaking with a provider
+- If you don't know the answer to a question, offer to have someone call them back
+
+When scheduling appointments:
+- Ask for the patient's preferred dates and times
+- Confirm the reason for the visit
+- Verify the patient's contact information
+- Provide a confirmation number and summary
+
+Be concise but thorough. Aim to complete interactions efficiently while ensuring accuracy."""
+
+        return base_prompt
+
+    @staticmethod
+    def doctor_info_prompt(doctor_name: str) -> str:
+        """Generate a prompt with doctor information for the agent.
+
+        Args:
+            doctor_name: Name of the doctor
+
+        Returns:
+            Doctor information prompt or empty string if not found
+        """
+        # Try to find doctor profile
+        for doctor_id in list_doctors():
+            profile = get_doctor_profile(doctor_id)
+            if profile and profile.name.lower() == doctor_name.lower():
+                return f"""Doctor Information:
+- Name: {profile.name}, {profile.title}
+- Speciality: {profile.speciality}
+- Bio: {profile.bio}
+- Office Hours: {profile.office_hours or 'Standard clinic hours'}
+- Accepting New Patients: {'Yes' if profile.accepts_new_patients else 'No'}
+- Contact: {profile.email or 'N/A'} | {profile.phone or 'N/A'}
+"""
+
+        return ""
+
+    @staticmethod
+    def system_prompt_legacy(clinic_name: str) -> str:
+        """Generate the system prompt for the medical voice agent (legacy method)."""
         return f"""You are a professional, empathetic medical front desk receptionist for {clinic_name}.
 
 Your responsibilities:
